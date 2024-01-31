@@ -9,7 +9,7 @@ entries:
     name: spring-app
     type: application
     urls:
-    - https://github.com/rimars/kyobobook-helm-charts.git/spring-app-0.0.2.tgz
+    - https://rimars.github.io/kyobobook-helm-charts/spring-app-0.0.2.tgz
     version: 0.0.2
   - apiVersion: v2
     appVersion: 1.16.0
@@ -19,6 +19,6 @@ entries:
     name: spring-app
     type: application
     urls:
-    - https://github.com/rimars/kyobobook-helm-charts.git/spring-app-0.0.1.tgz
+    - https://rimars.github.io/kyobobook-helm-charts/spring-app-0.0.1.tgz
     version: 0.0.1
 generated: "2024-01-31T16:42:21.7543234+09:00"
