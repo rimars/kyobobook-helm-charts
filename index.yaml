@@ -3,52 +3,12 @@ entries:
   spring-app:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-01-31T17:31:13.7620961+09:00"
+    created: "2024-01-31T17:46:51.2508451+09:00"
     description: A Helm chart for Kubernetes
-    digest: ffa8e5a393738e8bf5321b05a7b45a251e289f256f703872c7891098688c4356
-    name: spring-app
-    type: application
-    urls:
-    - https://rimars.github.io/kyobobook-helm-charts/spring-app-0.0.5.tgz
-    version: 0.0.5
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2024-01-31T17:31:13.7608848+09:00"
-    description: A Helm chart for Kubernetes
-    digest: 4eb907e1b92bc622ffadfff3987f845faa0f9d16086f4c1dec0fbd2a5c4d9797
-    name: spring-app
-    type: application
-    urls:
-    - https://rimars.github.io/kyobobook-helm-charts/spring-app-0.0.4.tgz
-    version: 0.0.4
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2024-01-31T17:31:13.7592046+09:00"
-    description: A Helm chart for Kubernetes
-    digest: f6173038c278e11b60be493a7408892cd1c27d858ec50f46da3af646422021e2
-    name: spring-app
-    type: application
-    urls:
-    - https://rimars.github.io/kyobobook-helm-charts/spring-app-0.0.3.tgz
-    version: 0.0.3
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2024-01-31T17:31:13.7586028+09:00"
-    description: A Helm chart for Kubernetes
-    digest: 658a65d036b51ccc9605fbb94c224c242c74efaa71d50c0c14ec8963ee139ef8
-    name: spring-app
-    type: application
-    urls:
-    - https://rimars.github.io/kyobobook-helm-charts/spring-app-0.0.2.tgz
-    version: 0.0.2
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2024-01-31T17:31:13.7580009+09:00"
-    description: A Helm chart for Kubernetes
-    digest: 8a264afdcd216979d54d15374227a215c0784d4ebf12e319363b353984614ded
+    digest: 63248e5120e6e9e52d34817f603f2a0ca4fb272c3ef4061c96040f8a9c32898a
     name: spring-app
     type: application
     urls:
     - https://rimars.github.io/kyobobook-helm-charts/spring-app-0.0.1.tgz
     version: 0.0.1
-generated: "2024-01-31T17:31:13.7573923+09:00"
+generated: "2024-01-31T17:46:51.2501429+09:00"
