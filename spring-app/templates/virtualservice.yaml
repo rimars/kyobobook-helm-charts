@@ -3,9 +3,9 @@ kind: VirtualService
 metadata:
   name: {{ .Values.app.name }}
 spec:
-  hosts: 
-  -"*"
-  gateways: 
+  hosts:
+  - "*"
+  gateways:
   - {{ .Values.app.name }}   
   http:
     - name: Canary
