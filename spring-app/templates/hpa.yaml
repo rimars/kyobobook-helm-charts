@@ -1,0 +1,44 @@
+{{- if .Values.autoscaling.enabled }}
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ .Values.app.name }} # cfserver
+spec:
+  scaleTargetRef:
+    apiVersion: argoproj.io/v1alpha1
+    kind: Rollout
+    name: {{ .Values.app.name }} # cfserver
+  minReplicas: {{ .Values.autoscaling.minReplicas }} 
+  maxReplicas: {{ .Values.autoscaling.maxReplicas }}
+  targetCPUUtilizationPercentage: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
+  # metrics:
+  #   {{- if .Values.autoscaling.targetCPUUtilizationPercentage }}
+  #   - type: Resource
+  #     resource:
+  #       name: cpu
+  #       target:
+  #         type: Utilization
+  #         averageUtilization: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
+  #   {{- end }}
+  #   {{- if .Values.autoscaling.memory.enabled }}
+  #   - type: Resource
+  #     resource:
+  #       name: memory
+  #       target:
+  #         type: Utilization
+  #         averageUtilization: {{ .Values.autoscaling.targetMemoryUtilizationPercentage }}
+  #   {{- end }}
+  # {{- if .Values.behavior.enabled }}
+  # behavior:
+  #   scaleUp:
+  #     stabilizationWindowSeconds: {{ .Values.behavior.stabilizationWindowSeconds }}
+  #     policies:
+  #       - type: Pods
+  #         value: {{ .Values.behavior.podValue }}
+  #         periodSeconds: {{ .Values.behavior.periodSeconds }}
+  #       - type: Percent
+  #         value: {{ .Values.behavior.percentValue }}
+  #         periodSeconds: {{ .Values.behavior.periodSeconds }}
+  #     selectPolicy: Max
+  # {{- end }}
+{{- end }}

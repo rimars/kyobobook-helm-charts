@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: {{ .Values.app.name }} # cfserver
+spec:
+  selector:
+    matchLabels:
+      app: "{{ .Values.app.name }}-{{ .Values.image.version }}"
+  replicas: 2
+  strategy:
+    canary:
+      steps:
+        - setWeight: 30
+        - pause: {}
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      annotations:
+        {{- if .Values.serviceMash.enabled }}
+        sidecar.istio.io/inject: "{{ .Values.serviceMash.istio }}"
+        sidecar.jaegertracing.io/inject: "{{ .Values.serviceMash.jaeger }}"
+        {{- end }}
+      labels:
+        app: "{{ .Values.app.name }}-{{ .Values.image.version }}"
+        image-version: {{ .Values.image.version }}
+    spec:
+      serviceAccountName: {{ .Values.app.name }} # cfserver
+      containers:
+        - image: "{{ .Values.image.repository }}:{{ .Values.image.version }}"
+          name: {{ .Values.app.name }} # cfserver
+          # env: {}
+          ports:
+            - containerPort: {{ .Values.image.containerPort }}
+              name: http
+          resources:
+            limits:
+              cpu: 200m
+              memory: 500Mi
+            requests:
+              cpu: 100m
+              memory: 300Mi
+      restartPolicy: Always
