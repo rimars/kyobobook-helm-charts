@@ -1,21 +1,21 @@
-kind: Route
-apiVersion: route.openshift.io/v1
-metadata:
-  name: {{ .Values.app.name }}
-  namespace: istio-system
-  labels:
-    maistra.io/gateway-name: {{ .Values.app.name }}
-    maistra.io/gateway-namespace: {{ .Values.app.namespace }}
-    maistra.io/generated-by: ior
-  annotations:
-    maistra.io/original-host: {{ .Values.ingress.host }}
-    haproxy.router.openshift.io/timeout: 24h
-spec:
-  host: {{ .Values.ingress.host }}
-  to:
-    kind: Service
-    name: istio-ingressgateway
-    weight: 100
-  port:
-    targetPort: {{ .Values.ingress.targetPort }}
-  wildcardPolicy: None
+# kind: Route
+# apiVersion: route.openshift.io/v1
+# metadata:
+#   name: {{ .Values.app.name }}
+#   namespace: istio-system
+#   labels:
+#     maistra.io/gateway-name: {{ .Values.app.name }}
+#     maistra.io/gateway-namespace: {{ .Values.app.namespace }}
+#     maistra.io/generated-by: ior
+#   annotations:
+#     maistra.io/original-host: {{ .Values.ingress.host }}
+#     haproxy.router.openshift.io/timeout: 24h
+# spec:
+#   host: {{ .Values.ingress.host }}
+#   to:
+#     kind: Service
+#     name: istio-ingressgateway
+#     weight: 100
+#   port:
+#     targetPort: {{ .Values.ingress.targetPort }}
+#   wildcardPolicy: None
