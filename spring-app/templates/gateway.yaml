@@ -10,4 +10,5 @@ spec:
         number: {{ .Values.service.port }}
         name: {{ .Values.service.name }}
         protocol: {{ .Values.service.protocol }}
-      hosts: {{ .Values.ingress.host }}
+      hosts: 
+        - {{ .Values.ingress.host }}
