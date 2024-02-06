@@ -1,0 +1,25 @@
+{{- if .Values.canary.enabled }}
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: "{{ .Values.app.name }}-canary" 
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - "{{ .value.namespace}}/{{ .Values.app.name }}"
+  http:
+    - name: Canary
+      match:
+        - headers:
+            kb_canary:
+              exact: kyobobook
+      route:
+        - destination:
+            host: {{ .Values.app.name }} # 까나리 서비스로 가고 --- cfserver
+            subset: Canary
+    - name: Random
+      route:
+        - destination:
+            host: {{ .Values.app.name }} # 원본 서비스로 가고  ---- cfserver : service name
+{{- end }}

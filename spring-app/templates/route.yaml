@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.app.name }}
   namespace: istio-system
   labels:
+    app: {{ .Values.app.name }}
     maistra.io/gateway-name: {{ .Values.app.name }}
     maistra.io/gateway-namespace: {{ .Values.app.namespace }}
     maistra.io/generated-by: ior

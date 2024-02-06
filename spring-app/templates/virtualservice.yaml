@@ -4,19 +4,21 @@ metadata:
   name: {{ .Values.app.name }}
 spec:
   hosts:
-  - "*"
+  - "*"                          # gatewayname
   gateways:
-  - {{ .Values.app.name }}
+  - {{ .Values.app.name }}       # gatewayname
   http:
-    - name: Canary
+    - name: Canary                                
       match:
         - headers:
-            rollout-version:
-              exact: "Canary"
+            rollout-version:     # header name
+              exact: "Canary"    # header value
+            kb_canary:
+              exact: kyobobook
       route:
         - destination:
             host: {{ .Values.app.name }} # cfserver
-            subset: Canary
+            subset: Canary       # 버전 특정 정책들 정의하고 service 레벨의 특정 설정을 overriding 합니다.
     - name: Random
       route:
         - destination:

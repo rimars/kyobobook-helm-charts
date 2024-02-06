@@ -1,14 +1,16 @@
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: {{ .Values.app.name }} # cfserver
+  name: "{{ .Values.app.name }}-gw" # cfserver
 spec:
   selector:
     istio: ingressgateway # use istio default controller
   servers:
     - port:
-        number: {{ .Values.service.port }}
-        name: {{ .Values.service.name }}
-        protocol: {{ .Values.service.protocol }}
+        number: {{ .Values.service.port }}  # 8080
+        name: {{ .Values.service.name }}    # http
+        protocol: {{ .Values.service.protocol }} # HTTP
       hosts: 
-        - {{ .Values.ingress.host }}
+        {{- range .Values.ingress.hosts }} # dns 여러개
+        - {{ . | quote }}
+        {{- end }}

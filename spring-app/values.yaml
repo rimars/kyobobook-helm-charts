@@ -100,7 +100,9 @@ securityContext: {}
 
 
 ingress:
-  host: cfserver.ndev.kyobobook.co.kr
+  hosts:
+    - cfserver.ndev.kyobobook.co.kr
+    - test.ndev.kyobobook.co.kr
   targetPort: http2
 
 resources: {}
