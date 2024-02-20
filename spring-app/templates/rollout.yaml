@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: "{{ .Values.app.name }}-{{ .Values.image.version }}"
+      app: "{{ .Values.app.name }}"
   replicas: {{ .Values.replicaCount }}
   stragegy:
     canary:
