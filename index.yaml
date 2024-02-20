@@ -3,12 +3,22 @@ entries:
   spring-app:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-02-20T14:11:30.9874673+09:00"
+    created: "2024-02-20T14:16:20.548875+09:00"
     description: A Helm chart for Kubernetes
-    digest: 10beaf24d035651467dc1b21f08edb21045684bb94e85868a0790ffe3beb1bab
+    digest: d86510a8530f4a4977095d0d537e56a474bdd60f06df40bfd1ae087394c1193c
+    name: spring-app
+    type: application
+    urls:
+    - https://rimars.github.io/kyobobook-helm-charts/spring-app-0.1.0.tgz
+    version: 0.1.0
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-02-20T14:16:20.5482817+09:00"
+    description: A Helm chart for Kubernetes
+    digest: 9aaebb90352ea6168449d3b1a61113a705278b8902a5765e573288fb06abc833
     name: spring-app
     type: application
     urls:
     - https://rimars.github.io/kyobobook-helm-charts/spring-app-0.0.9.tgz
     version: 0.0.9
-generated: "2024-02-20T14:11:30.9863446+09:00"
+generated: "2024-02-20T14:16:20.5476779+09:00"

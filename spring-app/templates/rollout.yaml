@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: "{{ .Values.app.name }}"
   replicas: {{ .Values.replicaCount }}
-  stragegy:
+  strategy:
     canary:
       steps:
         - setWeight: 30
