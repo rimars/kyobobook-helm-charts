@@ -6,19 +6,12 @@ app:
   namespace: cm-dev
   profile: dev
 
-replicaCount: 1
+replicaCount: 2
 
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Automatically mount a ServiceAccount's API credentials?
-  automount: true
-  # Annotations to add to the service account
-  annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
-
+ingress:
+  hosts:
+    - cfserver.ndev.kyobobook.co.kr
+  targetPort: http2
 
 service:
   type: ClusterIP
@@ -35,13 +28,17 @@ serviceMash:
 
 
 image:
-  repository: image-registry.openshift-image-registry.svc:5000/cm-dev/cfserver
+  repository: image-registry.openshift-image-registry.svc:5000/cloud-dev/cfserver:0.0.1
   version: 0.0.1
   pullPolicy: IfNotPresent
   containerPort: 8080
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
- 
+
+serviceAccount:
+  create: true # Specifies whether a service account should be created
+  automount: true # Automatically mount a ServiceAccount's API credentials?
+  annotations: {} # Annotations to add to the service account
 
 autoscaling:
   memory:
@@ -59,60 +56,5 @@ behavior:
   stabilizationWindowSeconds: 180
 
 
-# Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
-
-# Additional volumeMounts on the output Deployment definition.
+# pv가 있으면 설정하자
 volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
-
-
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-
-
-podAnnotations: {}
-podLabels: {}
-
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
-
-ingress:
-  hosts:
-    - cfserver.ndev.kyobobook.co.kr
-    - test.ndev.kyobobook.co.kr
-  targetPort: http2
-
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
