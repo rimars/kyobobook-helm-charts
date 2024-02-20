@@ -6,7 +6,7 @@ spec:
   hosts:
   - "*"                          # gatewayname
   gateways:
-  - {{ .Values.app.name }}       # gatewayname
+  - "{{ .Values.app.name }}-gw"       # gatewayname
   http:
     - name: Canary                                
       match:
