@@ -60,7 +60,7 @@ spec:
             httpGet:
               path: {{ .Values.health.path }}        # /actuator/health
               port: {{ .Values.service.targetPort }} # 8080
-            timeoutSeconds: 1
+            timeoutSeconds: 10
             successThreshold: 1
             failureThreshold: 30
             periodSeconds: 10
@@ -76,7 +76,7 @@ spec:
             httpGet:
               path: {{ .Values.health.path }}        # /actuator/health
               port: {{ .Values.service.targetPort }} # 8080
-            timeoutSeconds: 1
+            timeoutSeconds: 10
             successThreshold: 1
             failureThreshold: 3
             periodSeconds: 10        
