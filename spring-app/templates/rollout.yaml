@@ -59,7 +59,7 @@ spec:
           startupProbe:
             httpGet:
               path: {{ .Values.health.path }}        # /actuator/health
-              port: {{ .Values.ingress.targetPort }} # 8080
+              port: {{ .Values.service.targetPort }} # 8080
             timeoutSeconds: 1
             successThreshold: 1
             failureThreshold: 30
@@ -67,7 +67,7 @@ spec:
           readinessProbe:
             httpGet:
               path: {{ .Values.health.path }}        # /actuator/health
-              port: {{ .Values.ingress.targetPort }} # 8080
+              port: {{ .Values.service.targetPort }} # 8080
             timeoutSeconds: 5
             successThreshold: 1
             failureThreshold: 3
@@ -75,7 +75,7 @@ spec:
           livenessProbe:
             httpGet:
               path: {{ .Values.health.path }}        # /actuator/health
-              port: {{ .Values.ingress.targetPort }} # 8080
+              port: {{ .Values.service.targetPort }} # 8080
             timeoutSeconds: 1
             successThreshold: 1
             failureThreshold: 3
