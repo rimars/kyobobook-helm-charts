@@ -7,21 +7,26 @@ spec:
     matchLabels:
       app: "{{ .Values.app.name }}-{{ .Values.image.version }}"
   replicas: {{ .Values.replicaCount }}
-  strategy:
+  stragegy:
     canary:
-      stableService: {{ .Values.app.name }}  # 안정 버전이 있는 포드를 선택하고 카나리아 버전이 있는 포드는 선택하지 않는 서비스
-      canaryService: {{ .Values.app.name }}  # 카나리아 ReplicaSet에만 트래픽을 보내도록 수정될 서비스를 참조
-      dynamicStableScale: true # 아래 trafficRouting하고 같이 사용 안정적인 ReplicaSet를 동적으로 확장하는 기능
-      trafficRouting: # 활성 버전과 Canary 버전 간의 트래픽 흐름을 제어하기 위해 적용할 트래픽 관리 규칙
-        istio:
-          virtualService:
-            name: "{{ .Values.app.name }}-canary"  # virtualservice name            
-      steps:                    # 생략시 롤링 업데이트로 동작
-        - setCanaryScale:
-          replicas: 5
-          # weight: 10          # replicas의 10%인 1개 pod를 가리킴 
-        - setWeight: 0          # 트래픽 처리할 비율 현재는 0으로 보내지 않음
-        - pause: {}             # Auto Promotion 옵션 비활성화
+      steps:
+        - setWeight: 30
+        - pause: {}
+  # strategy:
+  #   canary:
+  #     stableService: {{ .Values.app.name }}  # 안정 버전이 있는 포드를 선택하고 카나리아 버전이 있는 포드는 선택하지 않는 서비스
+  #     canaryService: {{ .Values.app.name }}  # 카나리아 ReplicaSet에만 트래픽을 보내도록 수정될 서비스를 참조
+  #     dynamicStableScale: true # 아래 trafficRouting하고 같이 사용 안정적인 ReplicaSet를 동적으로 확장하는 기능
+  #     trafficRouting: # 활성 버전과 Canary 버전 간의 트래픽 흐름을 제어하기 위해 적용할 트래픽 관리 규칙
+  #       istio:
+  #         virtualService:
+  #           name: "{{ .Values.app.name }}-canary"  # virtualservice name            
+  #     steps:                    # 생략시 롤링 업데이트로 동작
+  #       - setCanaryScale:
+  #         replicas: 5
+  #         # weight: 10          # replicas의 10%인 1개 pod를 가리킴 
+  #       - setWeight: 0          # 트래픽 처리할 비율 현재는 0으로 보내지 않음
+  #       - pause: {}             # Auto Promotion 옵션 비활성화
   revisionHistoryLimit: 2
   template:
     metadata:
@@ -31,18 +36,16 @@ spec:
         sidecar.jaegertracing.io/inject: "{{ .Values.serviceMash.jaeger }}"
         {{- end }}
       labels:
-        app: "{{ .Values.app.name }}-{{ .Values.image.version }}"   # 빌드 어플리케이션 버젼
+        app: "{{ .Values.app.name }}"   # 빌드 어플리케이션 버젼
         image-version: {{ .Values.image.version }}                  # 배포버젼(빌드시마다...)
     spec:
       serviceAccountName: {{ .Values.app.name }}                    # cfserver
       containers:
         - image: "{{ .Values.image.repository }}:{{ .Values.image.version }}"
           name: {{ .Values.app.name }} # cfserver
-
           envFrom:
           - secretRef:
              name: {{ .Values.secret.envName }}
-
           ports:
             - containerPort: {{ .Values.image.containerPort }}
               name: http
